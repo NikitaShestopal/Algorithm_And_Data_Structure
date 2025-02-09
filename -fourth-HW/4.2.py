@@ -1,17 +1,24 @@
-def sqrt(n: float, eps: float = 1e-6) -> float:
-    if n == 0:
-        return 0.0
+import math
 
-    left, right = 0, max(1, n)
-    while right - left > eps:
-        mid = (left + right) / 2
-        if mid * mid < n:
-            left = mid
+
+def f(x):
+    return x * x + math.sqrt(x)
+
+
+def main():
+    c = float(input())
+    left, right = 0, c
+
+    while right - left > 1e-10:
+        middle = (left + right) / 2
+        y = f(middle)
+        if y > c:
+            right = middle
         else:
-            right = mid
+            left = middle
 
-    return (left + right) / 2
+    print(left)
 
 
-n = float(input())
-print(f"{round(sqrt(n)):.9f}")
+if __name__ == "__main__":
+    main()
