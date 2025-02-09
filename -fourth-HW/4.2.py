@@ -1,14 +1,14 @@
-def sqrt(n:float):
-    res = 0
-    bit = 1 << 15
+def sqrt(n: float):
+    if n == 0:
+        return 0.0
+    x = n
+    while True:
+        next_x = 0.5 * (x + n / x)
+        if abs(next_x - x) < 1e-6:
+            break
+        x = next_x
 
-    while bit > 0:
-        temp = res | bit
-        if temp * temp <= n:
-            res = temp
-        bit >>= 1
-
-    return res
+    return x
 
 n = float(input())
-print(f"{sqrt(n):.10f}")
+print(f"{sqrt(n):.6f}")
