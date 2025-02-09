@@ -5,7 +5,7 @@ def f(x):
     return x * x + math.sqrt(x)
 
 
-def main():
+def done():
     c = float(input())
     left, right = 0, c
 
@@ -19,6 +19,4 @@ def main():
 
     print(left)
 
-
-if __name__ == "__main__":
-    main()
+done()
