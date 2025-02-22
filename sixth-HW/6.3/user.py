@@ -1,44 +1,36 @@
+BOOK_CAPACITY = 100000007
 
-"""
-Реалізуйте каталог деякої бібліотеки.
-Бібліотека може містити кілька книг одного автора.
-"""
+def hash_function(author, title):
+    return (hash(author) + hash(title)) % BOOK_CAPACITY
 
+class HashTable:
+    def __init__(self):
+        self.table = [None] * BOOK_CAPACITY
 
-def init():
-    """ Викликається 1 раз на початку виконання програми. """
-    pass
+    def insert(self, author, title):
+        index = hash_function(author, title)
+        while self.table[index] is not None:
+            if self.table[index] == (author, title):
+                return
+            index = (index + 1) % BOOK_CAPACITY
+        self.table[index] = (author, title)
 
+    def search(self, author, title):
+        index = hash_function(author, title)
+        while self.table[index] is not None:
+            if self.table[index] == (author, title):
+                return True
+            index = (index + 1) % BOOK_CAPACITY
+        return False
 
-def addBook(author, title):
-    """ Додає книгу до бібліотеки.
-    :param author: Автор книги
-    :param title: Назва книги
-    """
-    pass
+    def remove(self, author, title):
+        index = hash_function(author, title)
+        while self.table[index] is not None:
+            if self.table[index] == (author, title):
+                self.table[index] = None
+                return
+            index = (index + 1) % BOOK_CAPACITY
 
+hash_table = HashTable()
+author_books = {}
 
-def find(author, title):
-    """ Перевірає чи міститься задана книга у бібліотеці.
-    :param author: Автор
-    :param title: Назва книги
-    :return: True, якщо книга міститься у бібліотеці та False у іншому разі.
-    """
-    return False
-
-
-def delete(author, title):
-    """ Видаляє книгу з бібліотеки.
-    :param author: Автор
-    :param title: Назва книги
-    """
-    pass
-
-
-def findByAuthor(author):
-    """ Повертає список книг заданого автора.
-    Якщо бібліотека не міститься книг заданого автора, то підпрограма повертає порожній список.
-    :param author: Автор
-    :return: Список книг заданого автора у алфавітному порядку.
-    """
-    return []
