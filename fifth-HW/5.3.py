@@ -1,6 +1,3 @@
-import bisect
-
-
 def can_place_cows(stalls, k, min_dist):
     count = 1
     last_position = stalls[0]
@@ -15,14 +12,20 @@ def can_place_cows(stalls, k, min_dist):
 
 
 def largest_min_distance(n, k, stalls):
+    stalls.sort()
     left, right = 1, stalls[-1] - stalls[0]
+    best_dist = 0
 
-    def is_valid(mid):
-        return can_place_cows(stalls, k, mid)
-
-    best_dist = bisect.bisect_left(range(left, right + 1), True, key=is_valid) - 1 + left
+    while left <= right:
+        mid = (left + right) // 2
+        if can_place_cows(stalls, k, mid):
+            best_dist = mid
+            left = mid + 1
+        else:
+            right = mid - 1
 
     return best_dist
+
 
 n, k = map(int, input().split())
 stalls = list(map(int, input().split()))
