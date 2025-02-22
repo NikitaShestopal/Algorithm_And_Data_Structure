@@ -1,4 +1,4 @@
-BOOK_CAPACITY = 10007  # Просте число для ефективного хешування
+BOOK_CAPACITY = 10007
 
 def hash_function(author, title):
     return (hash(author) + hash(title)) % BOOK_CAPACITY
